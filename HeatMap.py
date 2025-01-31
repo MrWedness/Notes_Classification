@@ -1,3 +1,21 @@
+import numpy as np
+from PIL import ImageDraw, Image
+import tensorflow as tf
+from Transformer_Latent import create_cnn_transformer_model
+import matplotlib.pyplot as plt
+import cv2
+
+model_trans = create_cnn_transformer_model(
+  input_shape=(128, 128, 1),  # Assuming input shape
+  latent_dim=256,  # Latent space dimension
+  sequence_length=16,  # Sequence length for Transformer
+  num_classes=12,  # Number of output classes
+  cnn_filters=[32,64,128],
+  dropout_rate=0.5,
+  num_heads=12,
+  dense_dim=256  # Feed-forward layer dimension in Transformer
+  )
+
 def get_img_array(img_path, target_size):
 
     img = Image.open(img_path).convert("L")  # Convert to grayscale
