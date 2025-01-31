@@ -1,3 +1,21 @@
+from Transformer_Latent import create_cnn_transformer_model
+from tensorflow.keras.callbacks import EarlyStopping
+from sklearn.model_selection import train_test_split
+import numpy as np
+
+labels = np.load('labels.npy')
+
+images = np.load('images.npy')
+
+# First, create a train/test split
+train_images, temp_images, train_labels, temp_labels = train_test_split(
+    images, labels, test_size=0.4, random_state=42  # 60% train, 40% temp
+)
+
+# Then, split the temp set into validation and test sets
+val_images, test_images, val_labels, test_labels = train_test_split(
+    temp_images, temp_labels, test_size=0.5, random_state=42  # 20% val, 20% test
+)
 def Trans_Compile(filters, dropout_rates, attention_heads, dope, LatentDim):
 
     results = []
@@ -17,7 +35,7 @@ def Trans_Compile(filters, dropout_rates, attention_heads, dope, LatentDim):
                 for dense_dim in dope:
                     for latent_dim in LatentDim:
                         # Clear session to avoid memory leaks
-                        clear_session()
+                        
 
                         # Create the CNN-Transformer model
                         model = create_cnn_transformer_model(
