@@ -1,4 +1,3 @@
-
 from sklearn.model_selection import train_test_split
 from Transformer_Latent import create_cnn_transformer_model
 import numpy as np
