@@ -1,3 +1,9 @@
+import tensorflow as tf
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dense, GlobalAveragePooling2D, Reshape
+from tensorflow.keras.models import Model
+
+
+
 class TransformerEncoder(tf.keras.layers.Layer):
     def __init__(self, embed_dim, dense_dim, num_heads, **kwargs):
         super().__init__(**kwargs)
