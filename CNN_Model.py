@@ -1,8 +1,11 @@
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dropout, Flatten, Dense, RandomFlip, RandomRotation
+import tensorflow as tf
+from tensorflow.keras.regularizers import l1_l2
+from tensorflow.keras.models import Model
+
+
 def create_model(Filter1, Filter2, Filter3, Filter4, kernelSize, Dropout_Rate, L1, L2):
 
-
-    # Clear any previous session
-    tf.keras.backend.clear_session()
 
     # Input layer based on the input shape
     inputs = Input(shape=(128, 128, 1))
