@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 def plot_loss_and_accuracy(histories):
     history_dict = histories.history
 
