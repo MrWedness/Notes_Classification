@@ -1,6 +1,14 @@
 #I fit this model with the best hyperparamters this was to get a full val acc/loss vs training epoch graph
 from tensorflow.keras.callbacks import ModelCheckpoint
 import tensorflow as tf
+from CNN_Model import create_model
+import numpy as np
+from sklearn.model_selection import train_test_split
+
+
+labels = np.load('labels.npy')
+
+images = np.load('images.npy')
 
 train_images, test_images, train_labels, test_labels = train_test_split(
     images, labels, test_size=0.4, random_state=42  
