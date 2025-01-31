@@ -1,4 +1,23 @@
-# Enable mixed precision training
+import tensorflow as tf
+from CNN_Model import create_model
+from tensorflow.keras.callbacks import EarlyStopping
+from sklearn.model_selection import train_test_split
+import numpy as np
+
+labels = np.load('labels.npy')
+
+images = np.load('images.npy')
+
+# First, create a train/test split
+train_images, temp_images, train_labels, temp_labels = train_test_split(
+    images, labels, test_size=0.4, random_state=42  # 60% train, 40% temp
+)
+
+# Then, split the temp set into validation and test sets
+val_images, test_images, val_labels, test_labels = train_test_split(
+    temp_images, temp_labels, test_size=0.5, random_state=42  # 20% val, 20% test
+)
+
 
 def model_compile(filters, dropout_rate, learning_rates, momentum, L1, L2, kernelSize, Opt):
 
@@ -36,11 +55,7 @@ def model_compile(filters, dropout_rate, learning_rates, momentum, L1, L2, kerne
               for mo in momentum:
                 for L_1 in L1:
                   for L_2 in L2:
-                    clear_session()
-
-                    # Set the policy to mixed precision
-                    policy = mixed_precision.Policy('mixed_float16')
-                    mixed_precision.set_global_policy(policy)
+                  
 
                     model = create_model(Filt[0], Filt[1], Filt[2], Filt[3], ks, do, L_1, L_2)
 
